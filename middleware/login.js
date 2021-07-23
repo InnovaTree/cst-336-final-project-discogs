@@ -3,6 +3,10 @@ const executeSQL = require("./executeSQL");
 const mysql = require("mysql");
 
 const login = async function (req) {
+  if(req.body.authenticated){
+    return [true, "User already logged on."];
+  }
+
   let sql = "SELECT password FROM user WHERE username = ?";
   let params = [req.body.username];
   let rows = await executeSQL(sql, params);

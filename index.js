@@ -46,7 +46,7 @@ const login = require("./middleware/login");
 const signUp = require("./middleware/signup");
 
 /**
- * Routes
+ * Page Routes
  */
 
 app.get("/", (req, res) => {
@@ -73,7 +73,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/logout", (req, res) => {
+app.get("/logout", isAuthenticated, (req, res) => {
   console.log(`User Logged Off: ${req.session.username}`);
   req.session.destroy();
   res.redirect("/");
@@ -93,6 +93,11 @@ app.post("/signup", async (req, res) => {
     res.redirect("/");
   }
 });
+
+/**
+ * API Routes
+ */
+
 
 /**
  * Listener
