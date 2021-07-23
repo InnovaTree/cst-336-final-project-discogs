@@ -1,0 +1,15 @@
+.nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+  color: red;
+}
+
+body{
+  height: 100vh;
+}
+
+main {
+  flex:1;
+}
