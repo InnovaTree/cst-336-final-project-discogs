@@ -66,6 +66,7 @@ app.post("/login", async (req, res) => {
   if (result) {
     req.session.authenticated = true;
     req.session.username = req.body.username;
+    console.log(`User Logged In: ${req.session.username}`);
     res.redirect("dashboard");
   } else {
     res.send(message);
@@ -73,6 +74,7 @@ app.post("/login", async (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
+  console.log(`User Logged Off: ${req.session.username}`);
   req.session.destroy();
   res.redirect("/");
 });
@@ -85,6 +87,7 @@ app.post("/signup", async (req, res) => {
   if (await signUp(req)) {
     req.session.authenticated = true;
     req.session.username = req.body.username;
+    console.log(`Created Account: ${req.session.username}`);
     res.redirect("dashboard");
   } else {
     res.redirect("/");
