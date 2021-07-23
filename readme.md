@@ -14,13 +14,18 @@
 
 ## _Final Project: Album Collection_
 
-### **Table of Contents:**
-
-> Placeholder toc
+Placeholder: link to website.
 
 ---
 
-Placeholder: link to website.
+### **Table of Contents:**
+
+> Placeholder
+
+---
+
+---
+
 
 ### **Team:**
 
@@ -29,23 +34,49 @@ Placeholder: link to website.
 - [Raymond Shum](https://github.com/raymondshum)
 - [Nicholas Stankovich](https://github.com/NStankovich)
 
+--- 
 
 ### **Project Description:**
 
-> Placeholder Description
+> This website allows a user to build and manage their album collection using the Discogs API.
+
+---
+
+### **Resources:**
+
+- [Discogs API Documentation](https://www.discogs.com/developers)
+- Suggested API Calls: 
+    - [GET] /database/search?q={query}&{?type,title,release_title,credit,artist,anv,label,genre,style,country,year,format,catno,barcode,track,submitter,contributor}
+    - [GET] /releases/{release_id}{?curr_abbr}
+    - [GET] /artists/{artist_id}
+    - [GET] /labels/{label_id}
+    - [GET] /marketplace/price_suggestions/{release_id}
+
+---
 
 ### **User Flow:**
 
-> Website Flowchart
+> User must be authorized first before proceeding to the dashboard and beyond. The
+user can only access to the "Home", "Sign Up" and "Log In" pages before then.
+
+![userflow](/documentation/userflow.JPG)
+
+---
 
 ### **DB Schema:**
 
-> DB Tables
+> We are querying the Discog's API for all album data: title, thumbnail, etc. Our DB
+only associates Discog's album IDs with our users.
+
+![schema](/documentation/schema.JPG)
+
+---
 
 ### **Screenshots:**
 
 > Placeholder Description
 
+---
 
 ### **Rubric:**
 
