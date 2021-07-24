@@ -44,6 +44,7 @@ const executeSQL = require("./middleware/executeSQL");
 const isAuthenticated = require("./middleware/isAuthenticated");
 const login = require("./middleware/login");
 const signUp = require("./middleware/signup");
+const getUserID = require("./middleware/getUserID");
 
 /**
  * Page Routes
@@ -66,6 +67,7 @@ app.post("/login", async (req, res) => {
   if (result) {
     req.session.authenticated = true;
     req.session.username = req.body.username;
+    req.session.userid = await getUserID(req);
     console.log(`User Logged In: ${req.session.username}`);
     res.redirect("dashboard");
   } else {
@@ -87,6 +89,7 @@ app.post("/signup", async (req, res) => {
   if (await signUp(req)) {
     req.session.authenticated = true;
     req.session.username = req.body.username;
+    req.session.userid = await getUserID(req);
     console.log(`Created Account: ${req.session.username}`);
     res.redirect("dashboard");
   } else {
