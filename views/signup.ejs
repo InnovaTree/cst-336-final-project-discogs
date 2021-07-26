@@ -4,22 +4,27 @@
   <div class="mb-3">
     <label for="fname" class="form-label">First Name: </label>
     <input type="text" class="form-control" id="fname" name="fname" />
+    <span class="errorFdbk" id="fnameFdbk"></span>
   </div>
   <div class="mb-3">
     <label for="lname" class="form-label">Last Name: </label>
     <input type="text" class="form-control" id="lname" name="lname" />
+    <span class="errorFdbk" id="lnameFdbk"></span>
   </div>
   <div class="mb-3">
     <label for="email" class="form-label">Email: </label>
     <input type="email" class="form-control" id="email" name="email" />
+    <span class="errorFdbk" id="emailFdbk"></span>
   </div>
   <div class="mb-3">
     <label for="username" class="form-label">Username: </label>
     <input type="text" class="form-control" id="username" name="username" />
+    <span class="errorFdbk" id="usernameFdbk"></span>
   </div>
   <div class="mb-3">
     <label for="password" class="form-label">Password: </label>
     <input type="password" class="form-control" id="password" name="password" />
+    <span class="errorFdbk" id="pwdFdbk"></span>
   </div>
   <div class="mb-3">
     <label for="password" class="form-label">Confirm Password: </label>
@@ -29,8 +34,11 @@
       id="passwordConfirm"
       name="passwordConfirm"
     />
+    <span class="errorFdbk" id="pwdConfFdbk"></span>
   </div>
-  <button type="submit" class="btn btn-primary">Sign Up</button>
+  <button type="submit" class="btn btn-primary" id="submit">Sign Up</button>
 </form>
+
+<script src="/js/signUpValid.js"></script>
 
 <%- include('partials/footer.ejs') %>
