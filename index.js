@@ -45,6 +45,7 @@ const isAuthenticated = require("./middleware/isAuthenticated");
 const login = require("./middleware/login");
 const signUp = require("./middleware/signup");
 const getUserID = require("./middleware/getUserID");
+const { restart } = require("nodemon");
 
 /**
  * Page Routes
@@ -55,7 +56,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/dashboard", isAuthenticated, (req, res) => {
-  res.render("dashboard", {username: req.session.username});
+  res.render("dashboard", { username: req.session.username });
 });
 
 app.get("/login", (req, res) => {
@@ -81,6 +82,24 @@ app.get("/logout", isAuthenticated, (req, res) => {
   res.redirect("/");
 });
 
+app.get("/search", async (req, res) => {
+  let url = `https://api.discogs.com/database/search?query=${req.query.query}&type=release`;
+  let response = await fetch(url, {
+    headers: { Authorization: `Discogs key=${apiKey}, secret=${apiSecret}` },
+  });
+  let data = await response.json();
+  res.render("results", { pageInfo: data.pagination, results: data.results });
+});
+
+app.get("/search/:searchId", async (req, res) => {
+  let url = `https://api.discogs.com/releases/${req.params.searchId}`;
+  let response = await fetch(url, {
+    headers: { Authorization: `Discogs key=${apiKey}, secret=${apiSecret}` },
+  });
+  let data = await response.json();
+  res.render("album", {results: data});
+});
+
 app.get("/signup", (req, res) => {
   res.render("signup");
 });
@@ -101,6 +120,32 @@ app.post("/signup", async (req, res) => {
  * API Routes
  */
 
+app.get("/api/collection/getcollection", async (req, res) => {
+  let sql = "SELECT albumid FROM collection WHERE userid = ?";
+  let params = [req.session.userid];
+  let rows = await executeSQL(sql, params);
+  res.send(rows);
+})
+
+app.get("/api/collection/update", async (req,res) => {
+  let sql;
+  let params;
+  let userid = req.session.userid;
+  let albumid = req.query.albumid;
+
+  switch( req.query.action ) {
+    case "add":
+      sql ="INSERT INTO collection (albumid) WHERE userid = ?";
+      params = [userid];
+      break;
+    case "delete":
+      sql="DELETE FROM collection WHERE albumid =? AND userid = ?";
+      params = [albumid, userid];
+      break;
+  }
+  console.log(sql);
+  console.log(params);
+});
 
 /**
  * Listener

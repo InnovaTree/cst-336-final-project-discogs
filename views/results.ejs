@@ -1,0 +1,35 @@
+<%- include('partials/header.ejs') %>
+
+<!-- Maybe turn this into a partial -->
+<form class="container mt-5 mb-5" action="/search">
+  <div class="input-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Album title..."
+      name="query"
+      id="query"
+    />
+    <span><button class="btn btn-primary">Search</button></span>
+  </div>
+</form>
+
+<section id="gallery" class="container">
+  <div class="row row-cols-5 mb-5">
+    <% for ( let i=0; i < results.length; i++) { %>
+
+    <div class="col d-flex flex-column mt-3 text-center">
+      <a href="/search/<%=results[i].id%>">
+        <% if (results[i].thumb != "") { %>
+        <img src="<%= results[i].thumb %>" width="150" height="150" />
+        <% } else { %>
+        <img src="https://via.placeholder.com/150" />
+        <% } %>
+      </a>
+    </div>
+
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer.ejs') %>
