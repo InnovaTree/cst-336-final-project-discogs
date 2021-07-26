@@ -83,7 +83,7 @@ app.get("/logout", isAuthenticated, (req, res) => {
 });
 
 app.get("/search", async (req, res) => {
-  let url = `https://api.discogs.com/database/search?q=${req.query.query}`;
+  let url = `https://api.discogs.com/database/search?query=${req.query.query}&type=release`;
   let response = await fetch(url, {
     headers: { Authorization: `Discogs key=${apiKey}, secret=${apiSecret}` },
   });
@@ -94,10 +94,10 @@ app.get("/search", async (req, res) => {
 app.get("/search/:searchId", async (req, res) => {
   let url = `https://api.discogs.com/releases/${req.params.searchId}`;
   let response = await fetch(url, {
-    headers: { Authorization: `Discogs key=${apiKey}, secret=${apiSecret}`},
+    headers: { Authorization: `Discogs key=${apiKey}, secret=${apiSecret}` },
   });
   let data = await response.json();
-  // Here
+  res.render("album", {results: data});
 });
 
 app.get("/signup", (req, res) => {
