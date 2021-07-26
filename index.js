@@ -135,16 +135,16 @@ app.get("/api/collection/update", async (req,res) => {
 
   switch( req.query.action ) {
     case "add":
-      sql ="INSERT INTO collection (albumid) WHERE userid = ?";
-      params = [userid];
+      sql ="INSERT INTO collection (userid, albumid) VALUES (?, ?)";
+      params = [userid, albumid];
       break;
     case "delete":
       sql="DELETE FROM collection WHERE albumid =? AND userid = ?";
       params = [albumid, userid];
       break;
   }
-  console.log(sql);
-  console.log(params);
+  let rows = await executeSQL(sql, params);
+  res.send(rows);
 });
 
 /**
