@@ -2,4 +2,20 @@
 
 <div class="mt-auto text-center"><h1><%= username -%>'s Dashboard</h1></div>
 
+<div>
+  <h1 class="text-center mt-3">Find your albums!</h1>
+</div>
+<form class="container" action="/search">
+  <div class="input-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Album title..."
+      name="query"
+      id="query"
+    />
+    <span><button class="btn btn-primary">Search</button></span>
+  </div>
+</form>
+
 <%- include('partials/footer.ejs') %>
