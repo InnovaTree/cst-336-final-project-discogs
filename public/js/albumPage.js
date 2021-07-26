@@ -6,7 +6,6 @@ $(document).ready(function () {
 });
 
 async function updateColBtn(albumID) {
-  console.log("Loop");
   let collection = await col.getCollection();
   let match = isInCollection(collection, albumID)
   let addString =
@@ -19,7 +18,6 @@ async function updateColBtn(albumID) {
   } else {
     $("#collections").html(remString);
   }
-
   document.getElementById("col-btn").addEventListener("click", updateCol);
 }
 
