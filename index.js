@@ -120,6 +120,33 @@ app.post("/signup", async (req, res) => {
  * API Routes
  */
 
+app.get("/api/collection/getcollection", async (req, res) => {
+  let sql = "SELECT albumid FROM collection WHERE userid = ?";
+  let params = [req.session.userid];
+  let rows = await executeSQL(sql, params);
+  res.send(rows);
+})
+
+app.get("/api/collection/update", async (req,res) => {
+  let sql;
+  let params;
+  let userid = req.session.userid;
+  let albumid = req.query.albumid;
+
+  switch( req.query.action ) {
+    case "add":
+      sql ="INSERT INTO collection (albumid) WHERE userid = ?";
+      params = [userid];
+      break;
+    case "delete":
+      sql="DELETE FROM collection WHERE albumid =? AND userid = ?";
+      params = [albumid, userid];
+      break;
+  }
+  console.log(sql);
+  console.log(params);
+});
+
 /**
  * Listener
  */
