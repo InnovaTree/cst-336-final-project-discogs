@@ -7,7 +7,7 @@ $(document).ready( function(){
       isValid = false;
       $("#usernameFdbk").html(`<br>Please enter your username.`)
     }
-    if (!$("#password").val()==""){
+    if ($("#password").val()==""){
       isValid = false;
       $("#pwdFdbk").html(`<br>Please enter your password.`)
     }
