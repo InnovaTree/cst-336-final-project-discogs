@@ -1,13 +1,28 @@
-import * as col from "./collections.js";
-
 $(document).ready(function () {
   const albumID = getAlbumID();
 
   updateColBtn(albumID);
+  updateWishBtn(albumID);
 });
 
+async function updateWishBtn(albumID){
+  let wishList = await getWishList();
+  let match = isInCollection(wishList, albumID);
+  let addString =
+    "<button class='btn btn-primary' id='wsh-btn' value='add'>Add to Wishlist</button>";
+  let remString =
+    "<button class='btn btn-danger' id='wsh-btn' value='delete'> Remove from Wishlist</button>";
+
+  if (wishList.length == 0 || !match) {
+    $("#wishlist").html(addString);
+  } else {
+    $("#wishlist").html(remString);
+  }
+  document.getElementById("wsh-btn").addEventListener("click", updateWsh);
+}
+
 async function updateColBtn(albumID) {
-  let collection = await col.getCollection();
+  let collection = await getCollection();
   let match = isInCollection(collection, albumID);
   let addString =
     "<button class='btn btn-primary' id='col-btn' value='add'>Add to Collection</button>";
@@ -30,6 +45,14 @@ async function updateCol() {
   updateColBtn(albumID);
 }
 
+async function updateWsh() {
+  let albumID = getAlbumID();
+  let action = $("#wsh-btn").val();
+  let url = `/api/wishlist/update?albumid=${albumID}&action=${action}`;
+  await fetch(url);
+  updateWishBtn(albumID);
+}
+
 function isInCollection(collection, albumID) {
   for (const [key, object] of Object.entries(collection)) {
     if (albumID == object.albumid) {
@@ -43,4 +66,18 @@ function getAlbumID() {
   let pathArray = rawPath.split("/");
   let albumID = pathArray.pop();
   return albumID;
+}
+
+async function getCollection(){
+  let url= `/api/collection/getcollection`;
+  let response = await fetch(url);
+  let data = await response.json();
+  return data;
+}
+
+async function getWishList(){
+  let url= `/api/wishlist/getwishlist`;
+  let response = await fetch(url);
+  let data = await response.json();
+  return data;
 }

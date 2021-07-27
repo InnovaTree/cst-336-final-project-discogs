@@ -47,6 +47,7 @@ const signUp = require("./middleware/signup");
 const getUserID = require("./middleware/getUserID");
 const { restart } = require("nodemon");
 const validateUpdateCol = require("./middleware/validateUpdateCol");
+const validateUpdateWsh = require("./middleware/validateUpdateWsh");
 
 /**
  * Page Routes
@@ -124,7 +125,6 @@ app.post("/signup", async (req, res) => {
 app.get("/api/collection/getcollection", async (req, res) => {
   let sql = "SELECT albumid FROM collection WHERE userid = ?";
   let params = [req.session.userid];
-  // let params = [22]
   let rows = await executeSQL(sql, params);
   res.send(rows);
 })
@@ -133,11 +133,9 @@ app.get("/api/collection/update", async (req,res) => {
   let sql;
   let params;
   let userid = req.session.userid;
-  // let userid = 22;
   let albumid = req.query.albumid;
   let action = req.query.action;
   let inCollection = await validateUpdateCol(userid,albumid);
-  console.log(inCollection);
 
   if(action == "add" && !inCollection){
     sql ="INSERT INTO collection (userid, albumid) VALUES (?, ?)";
@@ -146,6 +144,34 @@ app.get("/api/collection/update", async (req,res) => {
     res.send(rows);
   } else if(action == "delete" && inCollection){
     sql="DELETE FROM collection WHERE albumid =? AND userid = ?";
+    params = [albumid, userid];
+    let rows = await executeSQL(sql, params);
+    res.send(rows);
+  }
+});
+
+app.get("/api/wishlist/getwishlist", async (req, res) => {
+  let sql = "SELECT albumid FROM wishlist WHERE userid = ?";
+  let params = [req.session.userid];
+  let rows = await executeSQL(sql, params);
+  res.send(rows);
+})
+
+app.get("/api/wishlist/update", async (req,res) => {
+  let sql;
+  let params;
+  let userid = req.session.userid;
+  let albumid = req.query.albumid;
+  let action = req.query.action;
+  let inWishList = await validateUpdateWsh(userid,albumid);
+
+  if(action == "add" && !inWishList){
+    sql ="INSERT INTO wishlist (userid, albumid) VALUES (?, ?)";
+    params = [userid, albumid];
+    let rows = await executeSQL(sql, params);
+    res.send(rows);
+  } else if(action == "delete" && inWishList){
+    sql="DELETE FROM wishlist WHERE albumid =? AND userid = ?";
     params = [albumid, userid];
     let rows = await executeSQL(sql, params);
     res.send(rows);
