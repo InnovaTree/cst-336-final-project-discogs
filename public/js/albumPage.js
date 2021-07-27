@@ -2,12 +2,13 @@ import * as col from "./collections.js";
 
 $(document).ready(function () {
   const albumID = getAlbumID();
+
   updateColBtn(albumID);
 });
 
 async function updateColBtn(albumID) {
   let collection = await col.getCollection();
-  let match = isInCollection(collection, albumID)
+  let match = isInCollection(collection, albumID);
   let addString =
     "<button class='btn btn-primary' id='col-btn' value='add'>Add to Collection</button>";
   let remString =
@@ -21,17 +22,17 @@ async function updateColBtn(albumID) {
   document.getElementById("col-btn").addEventListener("click", updateCol);
 }
 
-async function updateCol(){
+async function updateCol() {
   let albumID = getAlbumID();
   let action = $("#col-btn").val();
   let url = `/api/collection/update?albumid=${albumID}&action=${action}`;
-  let response = await fetch(url);
+  await fetch(url);
   updateColBtn(albumID);
 }
 
-function isInCollection(collection, albumID){
-  for(const [key, object] of Object.entries(collection)){
-    if(albumID == object.albumid){
+function isInCollection(collection, albumID) {
+  for (const [key, object] of Object.entries(collection)) {
+    if (albumID == object.albumid) {
       return true;
     }
   }

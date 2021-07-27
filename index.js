@@ -46,6 +46,7 @@ const login = require("./middleware/login");
 const signUp = require("./middleware/signup");
 const getUserID = require("./middleware/getUserID");
 const { restart } = require("nodemon");
+const validateUpdateCol = require("./middleware/validateUpdateCol");
 
 /**
  * Page Routes
@@ -134,19 +135,21 @@ app.get("/api/collection/update", async (req,res) => {
   let userid = req.session.userid;
   // let userid = 22;
   let albumid = req.query.albumid;
+  let action = req.query.action;
+  let inCollection = await validateUpdateCol(userid,albumid);
+  console.log(inCollection);
 
-  switch( req.query.action ) {
-    case "add":
-      sql ="INSERT INTO collection (userid, albumid) VALUES (?, ?)";
-      params = [userid, albumid];
-      break;
-    case "delete":
-      sql="DELETE FROM collection WHERE albumid =? AND userid = ?";
-      params = [albumid, userid];
-      break;
+  if(action == "add" && !inCollection){
+    sql ="INSERT INTO collection (userid, albumid) VALUES (?, ?)";
+    params = [userid, albumid];
+    let rows = await executeSQL(sql, params);
+    res.send(rows);
+  } else if(action == "delete" && inCollection){
+    sql="DELETE FROM collection WHERE albumid =? AND userid = ?";
+    params = [albumid, userid];
+    let rows = await executeSQL(sql, params);
+    res.send(rows);
   }
-  let rows = await executeSQL(sql, params);
-  res.send(rows);
 });
 
 /**
