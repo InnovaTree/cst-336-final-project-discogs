@@ -123,6 +123,7 @@ app.post("/signup", async (req, res) => {
 app.get("/api/collection/getcollection", async (req, res) => {
   let sql = "SELECT albumid FROM collection WHERE userid = ?";
   let params = [req.session.userid];
+  // let params = [22]
   let rows = await executeSQL(sql, params);
   res.send(rows);
 })
@@ -131,6 +132,7 @@ app.get("/api/collection/update", async (req,res) => {
   let sql;
   let params;
   let userid = req.session.userid;
+  // let userid = 22;
   let albumid = req.query.albumid;
 
   switch( req.query.action ) {

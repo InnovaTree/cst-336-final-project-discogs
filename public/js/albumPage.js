@@ -31,7 +31,9 @@ async function updateCol(){
 
 function isInCollection(collection, albumID){
   for(const [key, object] of Object.entries(collection)){
-    return albumID == object.albumid;
+    if(albumID == object.albumid){
+      return true;
+    }
   }
 }
 
