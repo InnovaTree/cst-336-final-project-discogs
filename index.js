@@ -84,6 +84,10 @@ app.get("/logout", isAuthenticated, (req, res) => {
   res.redirect("/");
 });
 
+app.get("/review/:albumId", async (req, res) => {
+  res.send("Hello!");
+})
+
 app.get("/search", async (req, res) => {
   let url = `https://api.discogs.com/database/search?query=${req.query.query}&type=release`;
   let response = await fetch(url, {
