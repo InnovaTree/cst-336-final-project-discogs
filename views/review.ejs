@@ -1,26 +1,29 @@
 <%- include('partials/header.ejs') %>
 
-<main class="container my-5">
-  <section id="userReview">
-    <h2>Your review: </h2>
-    <div id="reviewText">
-
+<main class="container my-5 d-flex flex-row">
+  <section id="pageLeft" class="d-flex flex-column text-center align-items-center">
+    <h4><%= title %></h4>
+    <img class="img-fluid" src="<%= image %>" width="300" height="300" />
+    <a href="/search/<%= albumid %>">
+      <button class="btn btn-primary" id="back">Return to Album</button>
+    </a>
+  </section>
+  <section id="pageRight" class="mx-5">
+    <div id="userReview">
+      <h2>Your review:</h2>
+      <div id="reviewText"></div>
+      <div id="reviewControls" class="my-5">
+        <button class="btn btn-primary" id="submit">Submit</button>
+        <button class="btn btn-primary" id="write">Write Review</button>
+        <button class="btn btn-primary" id="modify">Modify</button>
+        <button class="btn btn-primary" id="delete">Delete</button>
+      </div>
     </div>
-    <div id="reviewControls" class="my-5">
-      <button class="btn btn-primary" id="submit">Submit</button>
-      <button class="btn btn-primary" id="write">Write Review</button>
-      <button class="btn btn-primary" id="modify">Modify</button>
-      <button class="btn btn-primary" id="delete">Delete</button>
+    <div class="my-5">
+      <h2>User Reviews:</h2>
+      <div id="allReviews"></div>
     </div>
   </section>
-  <section class="my-5">
-    <h2>User Reviews: </h2>
-    <div id="allReviews">
-
-    </div>
-    
-  </section>
-
 </main>
 
 <script src="/js/reviewPage.js"></script>

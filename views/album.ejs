@@ -5,20 +5,16 @@
       <img
         src="<%= results.images[0].resource_url %>"
         class="img-fluid"
-        height="500"
-        width="500"
+        height="300"
+        width="300"
       />
       <div id="album-controls" class="text-center mt-3 d-flex flex-row">
         <hr />
         <span id="collections" class=""></span>
         <span id="wishlist" class="mx-3"></span>
-        <button id="review" class="btn btn-primary">
-          <a
-            class="link-light text-decoration-none"
-            href="/review/<%= results.id %>"
-            >Reviews</a
-          >
-        </button>
+        <a href="/review/<%= results.id %>">
+          <button id="review" class="btn btn-primary">See Reviews</button>
+        </a>
         <hr />
       </div>
     </div>
