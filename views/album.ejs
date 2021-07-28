@@ -21,45 +21,47 @@
 
     <section id="album-secondary" class="mx-5 container-fluid">
       <div id="album-details" class="border mt-3">
-        <h2>Album Details: </h2>
+        <h2>Album Details:</h2>
         <table class="table">
           <tr>
-            <td>Title:</td>
+            <td><strong>Title</strong>:</td>
             <td><%= results.title%></td>
           </tr>
           <tr>
-            <td>Artist:</td>
+            <td><strong>Artist</strong>:</td>
             <td><%= results.artists[0].name %></td>
           </tr>
           <tr>
-            <td>Format:</td>
+            <td><strong>Format</strong>:</td>
             <td><%= results.formats[0].name %></td>
           </tr>
           <tr>
-            <td>Released:</td>
+            <td><strong>Released</strong>:</td>
             <td><%= results.released %></td>
           </tr>
           <tr>
-            <td>Lowest Price:</td>
+            <td><strong>Lowest Price</strong>:</td>
             <td>$<%= results.lowest_price%></td>
           </tr>
         </table>
       </div>
       <div id="labels" class="border mt-3">
-        <h2>Labels: </h2>
+        <h2>Labels:</h2>
         <table class="table">
           <tr>
             <th>Name</th>
             <th>Catalogue Number</th>
           </tr>
           <% for (const[key, value] of Object.entries(results.labels)) { %>
+          <tr>
             <td><%= value.name %></td>
             <td><%= value.catno %></td>
+          </tr>
           <% } %>
         </table>
       </div>
       <div id="album-ids" class="border mt-3">
-        <h2>Identifiers: </h2>
+        <h2>Identifiers:</h2>
         <table class="table">
           <tr>
             <th>Type</th>
@@ -67,14 +69,16 @@
             <th>Description</th>
           </tr>
           <% for (const[key,value] of Object.entries(results.identifiers)) { %>
+          <tr>
             <td><%= value.type %></td>
             <td><%= value.value %></td>
             <td><%= value.description %></td>
+          </tr>
           <% } %>
         </table>
       </div>
       <div id="album-tracklist" class="border mt-3">
-        <h2>Tracklist: </h2>
+        <h2>Tracklist:</h2>
         <table class="table">
           <tr>
             <th>Track#</th>
