@@ -40,6 +40,26 @@ $(document).ready(async function () {
 
   $("#rev").on("click", async function () {
     initButtons();
+    let myRev = await getMyRev();
+    console.log(myRev);
+    let htmlString = ""; 
+    for (const [key, value] of Object.entries(myRev)) {
+      htmlString += `
+        <div class="mb-3 d-flex flex-row align-items-center">
+          <div class="d-flex flex-column text-center">
+            <a href="/review/${value.albumid}">
+              <img src="${value.image}" width="150" height="150">
+            </a>
+            <strong>${value.title}</strong>
+          </div>
+          <div class="p-3 mx-3 border border-dark container-fluid">
+            ${value.reviewtext}
+          </div>
+        </div>
+      `;
+    }
+    console.log(htmlString);
+    $("#content-body").html(htmlString);
     document.getElementById("rev").classList.add("btn-danger");
   });
 
@@ -82,6 +102,13 @@ $(document).ready(async function () {
 
   async function getMyWsh() {
     let url = "/api/wishlist/getdetailed";
+    let response = fetch(url);
+    let data = (await response).json();
+    return data;
+  }
+
+  async function getMyRev(){
+    let url = "/api/review/getdetailed";
     let response = fetch(url);
     let data = (await response).json();
     return data;
