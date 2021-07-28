@@ -45,6 +45,7 @@ const isAuthenticated = require("./middleware/isAuthenticated");
 const login = require("./middleware/login");
 const signUp = require("./middleware/signup");
 const getUserID = require("./middleware/getUserID");
+const validateAlbum = require("./middleware/validateAlbum");
 const validateUpdateCol = require("./middleware/validateUpdateCol");
 const validateUpdateWsh = require("./middleware/validateUpdateWsh");
 
@@ -135,6 +136,15 @@ app.post("/signup", async (req, res) => {
 /**
  * API Routes
  */
+
+app.get("/api/album/add", async (req, res) => {
+  const {albumid, title, image} = req.query;
+  let match = await validateAlbum.isPresent(albumid);
+  if (!match) {
+    await validateAlbum.addAlbum(albumid, title, image);
+  }
+  res.send(match);
+});
 
 app.get("/api/collection/getcollection", async (req, res) => {
   let userid = req.session.userid;
