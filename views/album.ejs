@@ -52,6 +52,10 @@
             <th>Name</th>
             <th>Catalogue Number</th>
           </tr>
+          <% for (const[key, value] of Object.entries(results.labels)) { %>
+            <td><%= value.name %></td>
+            <td><%= value.catno %></td>
+          <% } %>
         </table>
       </div>
       <div id="album-ids" class="border mt-3">
@@ -62,7 +66,11 @@
             <th>Value</th>
             <th>Description</th>
           </tr>
-          <% %>
+          <% for (const[key,value] of Object.entries(results.identifiers)) { %>
+            <td><%= value.type %></td>
+            <td><%= value.value %></td>
+            <td><%= value.description %></td>
+          <% } %>
         </table>
       </div>
       <div id="album-tracklist" class="border mt-3">
