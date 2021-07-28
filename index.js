@@ -45,7 +45,6 @@ const isAuthenticated = require("./middleware/isAuthenticated");
 const login = require("./middleware/login");
 const signUp = require("./middleware/signup");
 const getUserID = require("./middleware/getUserID");
-const { restart } = require("nodemon");
 const validateUpdateCol = require("./middleware/validateUpdateCol");
 const validateUpdateWsh = require("./middleware/validateUpdateWsh");
 
@@ -85,7 +84,16 @@ app.get("/logout", isAuthenticated, (req, res) => {
 });
 
 app.get("/review/:albumId", async (req, res) => {
-  res.render("review");
+  let url = `https://api.discogs.com/releases/${req.params.albumId}`;
+  let response = await fetch(url, {
+    headers: { Authorization: `Discogs key=${apiKey}, secret=${apiSecret}` },
+  });
+  let data = await response.json();
+  res.render("review", {
+    title: data.title,
+    image: data.images[0].resource_url,
+    albumid: req.params.albumId
+  });
 });
 
 app.get("/search", async (req, res) => {
