@@ -9,9 +9,9 @@ async function updateWishBtn(albumID){
   let wishList = await getWishList();
   let match = isInCollection(wishList, albumID);
   let addString =
-    "<button class='btn btn-primary' id='wsh-btn' value='add'>Add to Wishlist</button>";
+    "<button class='btn btn-primary' id='wsh-btn' value='add'>(+) Wishlist</button>";
   let remString =
-    "<button class='btn btn-danger' id='wsh-btn' value='delete'> Remove from Wishlist</button>";
+    "<button class='btn btn-danger' id='wsh-btn' value='delete'>(-) Wishlist</button>";
 
   if (wishList.length == 0 || !match) {
     $("#wishlist").html(addString);
@@ -25,9 +25,9 @@ async function updateColBtn(albumID) {
   let collection = await getCollection();
   let match = isInCollection(collection, albumID);
   let addString =
-    "<button class='btn btn-primary' id='col-btn' value='add'>Add to Collection</button>";
+    "<button class='btn btn-primary' id='col-btn' value='add'>(+) Collection</button>";
   let remString =
-    "<button class='btn btn-danger' id='col-btn' value='delete'> Remove from Collection</button>";
+    "<button class='btn btn-danger' id='col-btn' value='delete'>(-) Collection</button>";
 
   if (collection.length == 0 || !match) {
     $("#collections").html(addString);
