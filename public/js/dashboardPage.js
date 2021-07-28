@@ -20,6 +20,21 @@ $(document).ready(async function () {
 
   $("#wsh").on("click", async function () {
     initButtons();
+    let myWsh =  await getMyWsh();
+
+    let htmlString = '<div class="row row-cols-5">';
+    for (const [key, value] of Object.entries(myWsh)) {
+      htmlString += `
+        <div class="col d-flex flex-column mt-3 text-center">
+          <a href="/search/${value.albumid}">
+            <img src="${value.image}" width="150" height="150">
+          </a>
+          <strong>${value.title}</strong>
+        </div>
+      `;
+    }
+    htmlString += '</div>'
+    $("#content-body").html(htmlString);
     document.getElementById("wsh").classList.add("btn-danger");
   });
 
@@ -60,6 +75,13 @@ $(document).ready(async function () {
 
   async function getMyCol() {
     let url = "/api/collection/getdetailed";
+    let response = fetch(url);
+    let data = (await response).json();
+    return data;
+  }
+
+  async function getMyWsh() {
+    let url = "/api/wishlist/getdetailed";
     let response = fetch(url);
     let data = (await response).json();
     return data;
