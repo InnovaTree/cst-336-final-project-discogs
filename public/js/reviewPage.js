@@ -90,8 +90,8 @@ $(document).ready(async function () {
     if (allReview.length == 0) {
       $("#allReviews").html("Nobody else has written a review for this album!");
     } else {
+      $("#allReviews").html("");
       for (const [key, value] of Object.entries(allReview)) {
-        $("#allReviews").html("");
         $("#allReviews").append(`
           <div class="p-3 border border-dark">
             <p>${value.reviewtext}</p>

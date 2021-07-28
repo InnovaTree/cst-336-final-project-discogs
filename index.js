@@ -57,7 +57,7 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/dashboard", isAuthenticated, (req, res) => {
+app.get("/dashboard", (req, res) => {
   let username = req.session.username;
   let userid = req.session.username;
   res.render("dashboard", { username: username, userid: userid });
@@ -154,6 +154,18 @@ app.get("/api/collection/getcollection", async (req, res) => {
   res.send(rows);
 });
 
+app.get("/api/collection/getdetailed", async (req, res) => {
+  let userid = req.session.userid;
+  let sql = `
+    SELECT a.albumid, title, image FROM collection c
+    LEFT JOIN album a ON a.albumid = c.albumid
+    WHERE userid = ?
+  `;
+  let params = [userid];
+  let rows = await executeSQL(sql, params);
+  res.send(rows);
+});
+
 app.get("/api/collection/update", async (req, res) => {
   let sql;
   let params;
@@ -175,6 +187,18 @@ app.get("/api/collection/update", async (req, res) => {
   }
 });
 
+app.get("/api/wishlist/getdetailed", async (req, res) => {
+  let userid = req.session.userid;
+  let sql = `
+    SELECT a.albumid, title, image FROM wishlist w
+    LEFT JOIN album a ON a.albumid = w.albumid
+    WHERE userid = ?
+  `;
+  let params = [userid];
+  let rows = await executeSQL(sql, params);
+  res.send(rows);
+});
+
 app.get("/api/wishlist/getwishlist", async (req, res) => {
   let sql = "SELECT albumid FROM wishlist WHERE userid = ?";
   let params = [req.session.userid];
@@ -191,6 +215,18 @@ app.get("/api/review/getalbum", async (req, res) => {
     ON w.userid = u.userid
     WHERE albumid = ?`;
   let params = [albumid];
+  let rows = await executeSQL(sql, params);
+  res.send(rows);
+});
+
+app.get("/api/review/getdetailed", async (req, res) => {
+  let userid = req.session.userid;
+  let sql = `
+    SELECT a.albumid, title, image, reviewtext FROM review r
+    LEFT JOIN album a ON a.albumid = r.albumid
+    WHERE userid = ?
+  `;
+  let params = [userid];
   let rows = await executeSQL(sql, params);
   res.send(rows);
 });
