@@ -25,7 +25,6 @@ $(document).ready(async function () {
   });
 
   $("#submit").on("click", async function () {
-    console.log("click");
     let reviewText = $("#review").val();
 
     if (myReview.length == 0) {
@@ -121,7 +120,4 @@ $(document).ready(async function () {
     return data;
   }
 
-  async function updateReview(albumID, reviewText, action) {
-    console.log("Hello World!");
-  }
 });
