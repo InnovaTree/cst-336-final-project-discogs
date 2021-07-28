@@ -3,7 +3,7 @@ $(document).ready(async function () {
   var myReview;
   var allReview;
 
-  initPage();
+  await initPage();
 
   $("#delete").on("click", async function(){
     
@@ -12,7 +12,7 @@ $(document).ready(async function () {
       action: "delete",
     });;
 
-    initPage();
+    await initPage();
   });
 
   $("#write").on("click", function () {
@@ -41,7 +41,7 @@ $(document).ready(async function () {
       });
     }
 
-    initPage();
+    await initPage();
   });
 
   $("#modify").on("click", async function () {
@@ -97,6 +97,8 @@ $(document).ready(async function () {
         `);
       }
     }
+
+    return true;
   }
 
   function getAlbumID() {
