@@ -1,6 +1,20 @@
 $(document).ready(async function () {
   $("#col").on("click", async function () {
     initButtons();
+    let myCol = await getMyCol();
+    let htmlString = '<div class="row row-cols-5">';
+    for (const [key, value] of Object.entries(myCol)) {
+      htmlString += `
+        <div class="col d-flex flex-column mt-3 text-center">
+          <a href="/search/${value.albumid}">
+            <img src="${value.image}" width="150" height="150">
+          </a>
+          <strong>${value.title}</strong>
+        </div>
+      `;
+    }
+    htmlString += '</div>'
+    $("#content-body").html(htmlString);
     document.getElementById("col").classList.add("btn-danger");
   });
 
@@ -42,5 +56,12 @@ $(document).ready(async function () {
       buttons[i].classList.remove("btn-danger");
       buttons[i].classList.add("btn-primary");
     }
+  }
+
+  async function getMyCol() {
+    let url = "/api/collection/getdetailed";
+    let response = fetch(url);
+    let data = (await response).json();
+    return data;
   }
 });

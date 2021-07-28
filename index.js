@@ -57,9 +57,11 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/dashboard", isAuthenticated, (req, res) => {
-  let username = req.session.username;
-  let userid = req.session.username;
+app.get("/dashboard", (req, res) => {
+  // let username = req.session.username;
+  // let userid = req.session.username;
+  let userid = 1;
+  let username = "guest";
   res.render("dashboard", { username: username, userid: userid });
 });
 
@@ -149,6 +151,19 @@ app.get("/api/album/add", async (req, res) => {
 app.get("/api/collection/getcollection", async (req, res) => {
   let userid = req.session.userid;
   let sql = "SELECT albumid FROM collection WHERE userid = ?";
+  let params = [userid];
+  let rows = await executeSQL(sql, params);
+  res.send(rows);
+});
+
+app.get("/api/collection/getdetailed", async (req, res) => {
+  // let userid = req.session.userid;
+  let userid = 1;
+  let sql = `
+    SELECT a.albumid, title, image FROM collection c
+    LEFT JOIN album a ON a.albumid = c.albumid
+    WHERE userid = ?
+  `;
   let params = [userid];
   let rows = await executeSQL(sql, params);
   res.send(rows);
