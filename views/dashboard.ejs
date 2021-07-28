@@ -1,21 +1,20 @@
 <%- include('partials/header.ejs') %>
 
-<div class="mt-auto text-center"><h1><%= username -%>'s Dashboard</h1></div>
+<main class="mt-5 container">
+  <div class="text-center"><h1><%= username -%>'s Dashboard</h1></div>
+  <section id="controls" class="d-flex flex=row justify-content-center">
+    <button id="col" class="btn btn-primary">My Collection</button>
+    <button id="wsh" class="btn btn-primary mx-3">My Wishlist</button>
+    <button id="rev" class="btn btn-primary">My Reviews</button>
+    <button id="search" class="btn btn-primary mx-3">Search Albums</button>
+  </section>
+  <hr>
+  <section id="content">
+    <div id="content-title"></div>
+    <div id="content-body"></div>
+  </section>
+</main>
 
-<div>
-  <h1 class="text-center mt-3">Find your albums!</h1>
-</div>
-<form class="container" action="/search">
-  <div class="input-group">
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Album title..."
-      name="query"
-      id="query"
-    />
-    <span><button class="btn btn-primary">Search</button></span>
-  </div>
-</form>
+<script src="/js/dashboardPage.js"></script>
 
 <%- include('partials/footer.ejs') %>

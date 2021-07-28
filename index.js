@@ -57,7 +57,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/dashboard", isAuthenticated, (req, res) => {
-  res.render("dashboard", { username: req.session.username });
+  let username = req.session.username;
+  let userid = req.session.username;
+  res.render("dashboard", { username: username, userid: userid });
 });
 
 app.get("/login", (req, res) => {
@@ -92,7 +94,7 @@ app.get("/review/:albumId", async (req, res) => {
   res.render("review", {
     title: data.title,
     image: data.images[0].resource_url,
-    albumid: req.params.albumId
+    albumid: req.params.albumId,
   });
 });
 
@@ -135,8 +137,9 @@ app.post("/signup", async (req, res) => {
  */
 
 app.get("/api/collection/getcollection", async (req, res) => {
+  let userid = req.session.userid;
   let sql = "SELECT albumid FROM collection WHERE userid = ?";
-  let params = [req.session.userid];
+  let params = [userid];
   let rows = await executeSQL(sql, params);
   res.send(rows);
 });
