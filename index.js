@@ -85,8 +85,8 @@ app.get("/logout", isAuthenticated, (req, res) => {
 });
 
 app.get("/review/:albumId", async (req, res) => {
-  res.send("Hello!");
-})
+  res.render("review");
+});
 
 app.get("/search", async (req, res) => {
   let url = `https://api.discogs.com/database/search?query=${req.query.query}&type=release`;
@@ -103,7 +103,7 @@ app.get("/search/:searchId", async (req, res) => {
     headers: { Authorization: `Discogs key=${apiKey}, secret=${apiSecret}` },
   });
   let data = await response.json();
-  res.render("album", {results: data});
+  res.render("album", { results: data });
 });
 
 app.get("/signup", (req, res) => {
@@ -131,23 +131,23 @@ app.get("/api/collection/getcollection", async (req, res) => {
   let params = [req.session.userid];
   let rows = await executeSQL(sql, params);
   res.send(rows);
-})
+});
 
-app.get("/api/collection/update", async (req,res) => {
+app.get("/api/collection/update", async (req, res) => {
   let sql;
   let params;
   let userid = req.session.userid;
   let albumid = req.query.albumid;
   let action = req.query.action;
-  let inCollection = await validateUpdateCol(userid,albumid);
+  let inCollection = await validateUpdateCol(userid, albumid);
 
-  if(action == "add" && !inCollection){
-    sql ="INSERT INTO collection (userid, albumid) VALUES (?, ?)";
+  if (action == "add" && !inCollection) {
+    sql = "INSERT INTO collection (userid, albumid) VALUES (?, ?)";
     params = [userid, albumid];
     let rows = await executeSQL(sql, params);
     res.send(rows);
-  } else if(action == "delete" && inCollection){
-    sql="DELETE FROM collection WHERE albumid =? AND userid = ?";
+  } else if (action == "delete" && inCollection) {
+    sql = "DELETE FROM collection WHERE albumid =? AND userid = ?";
     params = [albumid, userid];
     let rows = await executeSQL(sql, params);
     res.send(rows);
@@ -159,23 +159,77 @@ app.get("/api/wishlist/getwishlist", async (req, res) => {
   let params = [req.session.userid];
   let rows = await executeSQL(sql, params);
   res.send(rows);
-})
+});
 
-app.get("/api/wishlist/update", async (req,res) => {
+app.get("/api/review/getalbum", async (req, res) => {
+  let albumid = req.query.albumid;
+  let sql = `
+    SELECT u.userid, username, reviewtext 
+    FROM review w
+    LEFT JOIN user u
+    ON w.userid = u.userid
+    WHERE albumid = ?`;
+  let params = [albumid];
+  let rows = await executeSQL(sql, params);
+  res.send(rows);
+});
+
+app.get("/api/review/getuser", async (req, res) => {
+  let userid = req.session.userid;
+  let sql = `
+    SELECT albumid, reviewtext
+    FROM review
+    WHERE userid = ?;`;
+  let params = [userid];
+  let rows = await executeSQL(sql, params);
+  res.send(rows);
+});
+
+app.post("/api/review/update", async (req, res) => {
+  let action = req.body.action;
+  let userid = req.session.userid;
+  let albumid = req.body.albumid;
+  let reviewtext = req.body.reviewtext;
+  let sql;
+  let params;
+
+  if (action == "add") {
+    sql = `INSERT INTO review (userid, albumid, reviewtext) VALUES (?,?,?)`;
+    params = [userid, albumid, reviewtext];
+    let rows = await executeSQL(sql, params);
+    res.send(rows);
+  } else if (action == "delete") {
+    sql = `DELETE FROM review WHERE userid = ? and albumid =?`;
+    let params = [userid, albumid];
+    let rows = await executeSQL(sql, params);
+    res.send(rows);
+  } else if (action == "modify") {
+    sql = `
+    UPDATE review
+    SET reviewtext = ?
+    WHERE userid = ? AND albumid = ?
+    `;
+    params = [reviewtext, userid, albumid];
+    let rows = await executeSQL(sql, params);
+    res.send(rows);
+  }
+});
+
+app.get("/api/wishlist/update", async (req, res) => {
   let sql;
   let params;
   let userid = req.session.userid;
   let albumid = req.query.albumid;
   let action = req.query.action;
-  let inWishList = await validateUpdateWsh(userid,albumid);
+  let inWishList = await validateUpdateWsh(userid, albumid);
 
-  if(action == "add" && !inWishList){
-    sql ="INSERT INTO wishlist (userid, albumid) VALUES (?, ?)";
+  if (action == "add" && !inWishList) {
+    sql = "INSERT INTO wishlist (userid, albumid) VALUES (?, ?)";
     params = [userid, albumid];
     let rows = await executeSQL(sql, params);
     res.send(rows);
-  } else if(action == "delete" && inWishList){
-    sql="DELETE FROM wishlist WHERE albumid =? AND userid = ?";
+  } else if (action == "delete" && inWishList) {
+    sql = "DELETE FROM wishlist WHERE albumid =? AND userid = ?";
     params = [albumid, userid];
     let rows = await executeSQL(sql, params);
     res.send(rows);
