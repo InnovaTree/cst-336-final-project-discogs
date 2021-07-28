@@ -9,10 +9,17 @@
         width="500"
       />
       <div id="album-controls" class="text-center mt-3 d-flex flex-row">
-        <hr>
-        <span id="collections" class="mx-3"></span>
+        <hr />
+        <span id="collections" class=""></span>
         <span id="wishlist" class="mx-3"></span>
-        <hr>
+        <button id="review" class="btn btn-primary">
+          <a
+            class="link-light text-decoration-none"
+            href="/review/<%= results.id %>"
+            >Reviews</a
+          >
+        </button>
+        <hr />
       </div>
     </div>
 
@@ -20,41 +27,41 @@
       <div id="album-details">
         <table class="table">
           <tr>
-            <td>Title: </td>
+            <td>Title:</td>
             <td><%= results.title%></td>
           </tr>
           <tr>
-            <td>Artist: </td>
+            <td>Artist:</td>
             <td><%= results.artists[0].name %></td>
           </tr>
           <tr>
-            <td>Format: </td>
+            <td>Format:</td>
             <td><%= results.formats[0].name %></td>
           </tr>
           <tr>
-            <td>Released: </td>
+            <td>Released:</td>
             <td><%= results.released %></td>
           </tr>
           <tr>
-            <td>Lowest Price: </td>
+            <td>Lowest Price:</td>
             <td>$<%= results.lowest_price%></td>
           </tr>
         </table>
       </div>
       <div id="album-tracklist">
-        <table class=table>
+        <table class="table">
           <tr>
             <th>Track#</th>
             <th>Title</th>
             <th>Duration(min)</th>
           </tr>
-        <% for (let i = 0; i < results.tracklist.length; i++) { %>
+          <% for (let i = 0; i < results.tracklist.length; i++) { %>
           <tr>
             <td><%= results.tracklist[i].position %></td>
             <td><%= results.tracklist[i].title %></td>
             <td><%= results.tracklist[i].duration %></td>
           </tr>
-        <% } %>
+          <% } %>
         </table>
       </div>
     </section>
