@@ -13,14 +13,14 @@ $(document).ready(async function () {
         </div>
       `;
     }
-    htmlString += '</div>'
+    htmlString += "</div>";
     $("#content-body").html(htmlString);
     document.getElementById("col").classList.add("btn-danger");
   });
 
   $("#wsh").on("click", async function () {
     initButtons();
-    let myWsh =  await getMyWsh();
+    let myWsh = await getMyWsh();
 
     let htmlString = '<div class="row row-cols-5">';
     for (const [key, value] of Object.entries(myWsh)) {
@@ -33,7 +33,7 @@ $(document).ready(async function () {
         </div>
       `;
     }
-    htmlString += '</div>'
+    htmlString += "</div>";
     $("#content-body").html(htmlString);
     document.getElementById("wsh").classList.add("btn-danger");
   });
@@ -42,7 +42,7 @@ $(document).ready(async function () {
     initButtons();
     let myRev = await getMyRev();
     console.log(myRev);
-    let htmlString = ""; 
+    let htmlString = "";
     for (const [key, value] of Object.entries(myRev)) {
       htmlString += `
         <div class="mb-3 d-flex flex-row align-items-center">
@@ -70,18 +70,24 @@ $(document).ready(async function () {
     $("#content-title").html("");
 
     $("#content-body").html(`
-      <form class="container" action="/search">
-        <div class="input-group">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Album title..."
-            name="query"
-            id="query"
-          />
-        <span><button class="btn btn-primary">Search</button></span>
-        </div>
-      </form>
+    <form class="container mt-5 mb-5" action="/search">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Enter Search..."
+        name="query"
+        id="query"
+      />
+      <select class="form-select" id="search-select" name="type">
+        <option value="title">Search by...</option>
+        <option value="title">Title</option>
+        <option value="barcode">Barcode</option>
+        <option value="catno">Catalogue Number</option>
+      </select>
+      <button class="btn btn-primary">Search</button>
+    </div>
+  </form>
     `);
   });
 
@@ -107,7 +113,7 @@ $(document).ready(async function () {
     return data;
   }
 
-  async function getMyRev(){
+  async function getMyRev() {
     let url = "/api/review/getdetailed";
     let response = fetch(url);
     let data = (await response).json();
