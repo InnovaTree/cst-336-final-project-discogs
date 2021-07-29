@@ -54,17 +54,20 @@ const validateUpdateWsh = require("./middleware/validateUpdateWsh");
  */
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", { authenticated: req.session.authenticated });
 });
 
-app.get("/dashboard", (req, res) => {
-  let username = req.session.username;
-  let userid = req.session.username;
-  res.render("dashboard", { username: username, userid: userid });
+app.get("/dashboard", isAuthenticated, (req, res) => {
+  const { authenticated, userid, username } = req.session;
+  res.render("dashboard", {
+    authenticated: authenticated,
+    username: username,
+    userid: userid,
+  });
 });
 
 app.get("/login", (req, res) => {
-  res.render("login");
+  res.render("login", { authenticated: req.session.authenticated });
 });
 
 app.post("/login", async (req, res) => {
@@ -86,39 +89,45 @@ app.get("/logout", isAuthenticated, (req, res) => {
   res.redirect("/");
 });
 
-app.get("/review/:albumId", async (req, res) => {
+app.get("/review/:albumId", isAuthenticated, async (req, res) => {
   let url = `https://api.discogs.com/releases/${req.params.albumId}`;
   let response = await fetch(url, {
     headers: { Authorization: `Discogs key=${apiKey}, secret=${apiSecret}` },
   });
   let data = await response.json();
   res.render("review", {
+    authenticated: req.session.authenticated,
     title: data.title,
     image: data.images[0].resource_url,
     albumid: req.params.albumId,
   });
 });
 
-app.get("/search", async (req, res) => {
+app.get("/search", isAuthenticated, async (req, res) => {
   let url = `https://api.discogs.com/database/search?${req.query.type}=${req.query.query}&type=release`;
   let response = await fetch(url, {
     headers: { Authorization: `Discogs key=${apiKey}, secret=${apiSecret}` },
   });
   let data = await response.json();
-  res.render("results", { pageInfo: data.pagination, results: data.results });
+
+  res.render("results", {
+    authenticated: req.session.authenticated,
+    pageInfo: data.pagination,
+    results: data.results,
+  });
 });
 
-app.get("/search/:searchId", async (req, res) => {
+app.get("/search/:searchId", isAuthenticated, async (req, res) => {
   let url = `https://api.discogs.com/releases/${req.params.searchId}`;
   let response = await fetch(url, {
     headers: { Authorization: `Discogs key=${apiKey}, secret=${apiSecret}` },
   });
   let data = await response.json();
-  res.render("album", { results: data });
+  res.render("album", { authenticated: req.session.authenticated, results: data });
 });
 
 app.get("/signup", (req, res) => {
-  res.render("signup");
+  res.render("signup", { authenticated: req.session.authenticated });
 });
 
 app.post("/signup", async (req, res) => {
