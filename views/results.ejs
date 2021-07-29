@@ -1,16 +1,21 @@
 <%- include('partials/header.ejs') %>
 
-<!-- Maybe turn this into a partial -->
 <form class="container mt-5 mb-5" action="/search">
   <div class="input-group">
     <input
       type="text"
       class="form-control"
-      placeholder="Album title..."
+      placeholder="Enter Search..."
       name="query"
       id="query"
     />
-    <span><button class="btn btn-primary">Search</button></span>
+    <select class="form-select" id="search-select" name="type">
+      <option value="title">Search by...</option>
+      <option value="title">Title</option>
+      <option value="barcode">Barcode</option>
+      <option value="catno">Catalogue Number</option>
+    </select>
+    <button class="btn btn-primary">Search</button>
   </div>
 </form>
 

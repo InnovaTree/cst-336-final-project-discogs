@@ -100,7 +100,7 @@ app.get("/review/:albumId", async (req, res) => {
 });
 
 app.get("/search", async (req, res) => {
-  let url = `https://api.discogs.com/database/search?query=${req.query.query}&type=release`;
+  let url = `https://api.discogs.com/database/search?${req.query.type}=${req.query.query}&type=release`;
   let response = await fetch(url, {
     headers: { Authorization: `Discogs key=${apiKey}, secret=${apiSecret}` },
   });
@@ -138,7 +138,7 @@ app.post("/signup", async (req, res) => {
  */
 
 app.get("/api/album/add", async (req, res) => {
-  const {albumid, title, image} = req.query;
+  const { albumid, title, image } = req.query;
   let match = await validateAlbum.isPresent(albumid);
   if (!match) {
     await validateAlbum.addAlbum(albumid, title, image);
