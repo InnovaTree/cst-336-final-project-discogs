@@ -1,3 +1,110 @@
+#footer-txt {
+  align-self: center;
+  font-size: 0.8rem;
+}
+
+#home-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". g1 g1 . ."
+    ". . g2 g2 ."
+    ". . g3 . .";
+  width: 100%;
+  height: 100%;
+}
+
+#home-grid h1 {
+  color: white;
+  text-shadow: 2px 2px 5px black;
+}
+
+#home-grid button {
+  box-shadow: 2px 2px 5px black;
+}
+
+.g1 {
+  grid-area: g1;
+  align-self: end;
+}
+.g2 {
+  grid-area: g2;
+}
+.g3 {
+  grid-area: g3;
+  justify-self: center;
+  align-items: start;
+}
+
+.bg-img {
+  background-image: url("https://images.pexels.com/photos/2191013/pexels-photo-2191013.jpeg");
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+}
+
+#sign-up-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "sg1 sg2";
+  width: 100%;
+  height: 100%;
+}
+
+.sg2 {
+  background-image: url("https://images.pexels.com/photos/5211558/pexels-photo-5211558.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#login {
+  display:flex;
+  align-items: center;
+}
+
+#login form {
+  width: 30%;
+  background-color: rgba(255, 255, 255, 0.90);
+  box-shadow: 1px 1px 10px black;
+}
+
+.login-bg {
+  background-image: url("https://images.pexels.com/photos/744318/pexels-photo-744318.jpeg");
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+}
+
+.nav-img {
+  height: 3rem;
+}
+
+.custom-hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0)
+  );
+  margin: 1rem 0;
+}
+
 .nav-link {
   color: white;
 }
@@ -6,10 +113,18 @@
   color: red;
 }
 
-body{
+body {
   height: 100vh;
 }
 
 main {
-  flex:1;
+  flex: 1;
+}
+
+footer {
+  background-image: url("/img/papyrus-dark.png");
+}
+
+nav {
+  background-image: url("/img/papyrus-dark.png");
 }
