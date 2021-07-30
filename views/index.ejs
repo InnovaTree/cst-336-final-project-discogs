@@ -1,9 +1,30 @@
 <%- include('partials/header.ejs') %>
 
-<div class="container p-5 text-white bg-dark rounded-3 mt-auto">
-  <h2>This is a placeholder.</h2>
-  <p>This isn't even my code. We need to fix this later.</p>
-  <button class="btn btn-outline-light" type="button">Get Started!</button>
-</div>
+<!-- <main id="home" class="d-flex justify-content-center align-items-center">
+  <div class="p-5 text-white bg-dark rounded-3 w-25">
+    <h2>Find your favorite albums!</h2>
+    <hr />
+    <p class="my-3">
+      This website hooks into the Discogs API to let you search for albums, add
+      them to your collection and to share your reviews with the community.
+    </p>
+    <a href="/signup">
+      <button class="btn btn-outline-light" type="button">Get Started!</button>
+    </a>
+  </div>
+</main> -->
+
+<main id="home-grid">
+  <div class="bg-img bg-blur"></div>
+  <div class="g1"><h1 class="display-1">Find your favorite</h1></div>
+  <div class="g2"><h1 class="display-1">albums today...</h1></div>
+  <div class="g3">
+    <a href="/signup">
+    <button class=" btn btn-dark ">
+      <h1 class="display-6" >Start Now</h1>
+    </button>
+  </a>
+  </div>
+</main>
 
 <%- include('partials/footer.ejs') %>

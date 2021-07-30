@@ -259,6 +259,8 @@ app.post("/api/review/update", async (req, res) => {
   let sql;
   let params;
 
+  console.log(action, userid, albumid, reviewtext);
+
   if (action == "add") {
     sql = `INSERT INTO review (userid, albumid, reviewtext) VALUES (?,?,?)`;
     params = [userid, albumid, reviewtext];

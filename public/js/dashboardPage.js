@@ -45,7 +45,7 @@ $(document).ready(async function () {
     let htmlString = "";
     for (const [key, value] of Object.entries(myRev)) {
       htmlString += `
-        <div class="mb-3 d-flex flex-row align-items-center">
+        <div class="my-3 d-flex flex-row align-items-center">
           <div class="d-flex flex-column text-center">
             <a href="/review/${value.albumid}">
               <img src="${value.image}" width="150" height="150">

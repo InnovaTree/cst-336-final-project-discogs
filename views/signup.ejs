@@ -1,36 +1,41 @@
 <%- include('partials/header.ejs') %>
 
-<form class="container-lg p-5" method="POST" action="/signup">
-  <div class="mb-3">
-    <label for="fname" class="form-label">First Name: </label>
-    <input type="text" class="form-control" id="fname" name="fname" />
-  </div>
-  <div class="mb-3">
-    <label for="lname" class="form-label">Last Name: </label>
-    <input type="text" class="form-control" id="lname" name="lname" />
-  </div>
-  <div class="mb-3">
-    <label for="email" class="form-label">Email: </label>
-    <input type="email" class="form-control" id="email" name="email" />
-  </div>
-  <div class="mb-3">
-    <label for="username" class="form-label">Username: </label>
-    <input type="text" class="form-control" id="username" name="username" />
-  </div>
-  <div class="mb-3">
-    <label for="password" class="form-label">Password: </label>
-    <input type="password" class="form-control" id="password" name="password" />
-  </div>
-  <div class="mb-3">
-    <label for="password" class="form-label">Confirm Password: </label>
-    <input
-      type="password"
-      class="form-control"
-      id="passwordConfirm"
-      name="passwordConfirm"
-    />
-  </div>
-  <button type="submit" class="btn btn-primary">Sign Up</button>
-</form>
+<main id="sign-up-grid">
+  <form class="container-lg p-5 sg1" method="POST" action="/signup">
+    <h3>Sign up, today!</h3>
+    <div class="custom-hr"></div>
+    <div class="mb-3">
+      <label for="fname" class="form-label">First Name: </label>
+      <input type="text" class="form-control" id="fname" name="fname" />
+    </div>
+    <div class="mb-3">
+      <label for="lname" class="form-label">Last Name: </label>
+      <input type="text" class="form-control" id="lname" name="lname" />
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email: </label>
+      <input type="email" class="form-control" id="email" name="email" />
+    </div>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username: </label>
+      <input type="text" class="form-control" id="username" name="username" />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password: </label>
+      <input type="password" class="form-control" id="password" name="password" />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Confirm Password: </label>
+      <input
+        type="password"
+        class="form-control"
+        id="passwordConfirm"
+        name="passwordConfirm"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+  </form>
+  <div class="sg2"></div>
+</main>
 
 <%- include('partials/footer.ejs') %>
