@@ -95,10 +95,12 @@ app.get("/review/:albumId", isAuthenticated, async (req, res) => {
     headers: { Authorization: `Discogs key=${apiKey}, secret=${apiSecret}` },
   });
   let data = await response.json();
+  let imageURL ="https://via.placeholder.com/300";
+  let image = data.images ? data.images[0].resource_url : imageURL;
   res.render("review", {
     authenticated: req.session.authenticated,
     title: data.title,
-    image: data.images[0].resource_url,
+    image: image,
     albumid: req.params.albumId,
   });
 });
@@ -258,8 +260,6 @@ app.post("/api/review/update", async (req, res) => {
   let reviewtext = req.body.reviewtext;
   let sql;
   let params;
-
-  console.log(action, userid, albumid, reviewtext);
 
   if (action == "add") {
     sql = `INSERT INTO review (userid, albumid, reviewtext) VALUES (?,?,?)`;
