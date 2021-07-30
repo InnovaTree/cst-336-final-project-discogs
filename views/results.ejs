@@ -1,8 +1,8 @@
 <%- include('partials/header.ejs') %>
 
 <main>
-  <form class="container mt-5 mb-5" action="/search">
-    <div class="input-group">
+  <form class="container mt-5 mb-5 search-form" action="/search">
+    <div class="search">
       <input
         type="text"
         class="form-control"
@@ -10,7 +10,7 @@
         name="query"
         id="query"
       />
-      <select class="form-select" id="search-select" name="type">
+      <select id="search-select" class="form-select"  name="type">
         <option value="title">Search by...</option>
         <option value="title">Title</option>
         <option value="barcode">Barcode</option>

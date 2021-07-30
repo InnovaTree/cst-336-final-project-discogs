@@ -70,8 +70,8 @@ $(document).ready(async function () {
     $("#content-title").html("");
 
     $("#content-body").html(`
-    <form class="container mt-5 mb-5" action="/search">
-    <div class="input-group">
+    <form class="container mt-5 mb-5 search-form" action="/search">
+    <div class="search">
       <input
         type="text"
         class="form-control"
