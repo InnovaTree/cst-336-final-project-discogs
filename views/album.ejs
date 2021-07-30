@@ -3,6 +3,7 @@
   <section id="album-container" class="mt-5 mb-5 container">
     <section id="album-main" class="d-flex flex-row">
       <div id="album-primary">
+        <% if (results.images) { %>
         <img
           id="image"
           src="<%= results.images[0].resource_url %>"
@@ -10,6 +11,13 @@
           height="300"
           width="300"
         />
+        <% } else { %>
+        <img
+          id="image"
+          src="https://via.placeholder.com/300"
+          class="img-fluid"
+        />
+        <% } %>
         <div id="album-controls" class="text-center mt-3 d-flex flex-row">
           <hr />
           <span id="collections" class=""></span>

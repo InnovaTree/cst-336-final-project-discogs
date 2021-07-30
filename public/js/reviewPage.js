@@ -2,16 +2,15 @@ $(document).ready(async function () {
   const albumID = getAlbumID();
   var myReview;
   var allReview;
-
+  var inCollection;
 
   await initPage();
 
-  $("#delete").on("click", async function(){
-    
+  $("#delete").on("click", async function () {
     await $.post("/api/review/update", {
       albumid: albumID,
       action: "delete",
-    });;
+    });
 
     await initPage();
   });
@@ -58,16 +57,24 @@ $(document).ready(async function () {
     $("#submit").show();
   });
 
-  $("#delete").on("click", async function(){
-
-  });
+  $("#delete").on("click", async function () {});
 
   async function initPage() {
     myReview = await getMyReview();
     allReview = await getAllReview(albumID);
     let reviewText = findMyReview(myReview);
+    let myCol = await getCollection();
+    let inCol = isInCollection(myCol, albumID);
 
-    if (myReview.length == 0 || !alreadyReviewed(myReview)) {
+    if (!inCol) {
+      $("#reviewText").html(
+        "You can only write reviews for albums in your collection!"
+      );
+      $("#submit").hide();
+      $("#write").hide();
+      $("#modify").hide();
+      $("#delete").hide();
+    } else if (myReview.length == 0 || !alreadyReviewed(myReview)) {
       $("#reviewText").html("You have not written a review for this album!");
       $("#submit").hide();
       $("#write").show();
@@ -119,6 +126,21 @@ $(document).ready(async function () {
     return data;
   }
 
+  async function getCollection() {
+    let url = `/api/collection/getcollection`;
+    let response = await fetch(url);
+    let data = await response.json();
+    return data;
+  }
+
+  function isInCollection(collection, albumID) {
+    for (const [key, object] of Object.entries(collection)) {
+      if (albumID == object.albumid) {
+        return true;
+      }
+    }
+  }
+
   async function getMyReview() {
     let url = "/api/review/getuser";
     let response = await fetch(url);
@@ -127,21 +149,20 @@ $(document).ready(async function () {
   }
 
   function alreadyReviewed(myReview) {
-    for(const[key,value] of Object.entries(myReview)){
-      if(value.albumid == albumID){
+    for (const [key, value] of Object.entries(myReview)) {
+      if (value.albumid == albumID) {
         return true;
-      }
-    }
-    return false;
-  };
-
-  function findMyReview(myReview){
-    for(const[key,value] of Object.entries(myReview)){
-      if(value.albumid == albumID){
-        return value.reviewtext;
       }
     }
     return false;
   }
 
+  function findMyReview(myReview) {
+    for (const [key, value] of Object.entries(myReview)) {
+      if (value.albumid == albumID) {
+        return value.reviewtext;
+      }
+    }
+    return false;
+  }
 });

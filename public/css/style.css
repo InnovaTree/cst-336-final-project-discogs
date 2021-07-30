@@ -67,13 +67,13 @@
 }
 
 #login {
-  display:flex;
+  display: flex;
   align-items: center;
 }
 
 #login form {
   width: 30%;
-  background-color: rgba(255, 255, 255, 0.90);
+  background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 1px 1px 10px black;
 }
 
@@ -87,6 +87,25 @@
   z-index: -1;
   filter: blur(5px);
   -webkit-filter: blur(5px);
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+}
+
+.search {
+  display: flex;
+  flex-basis: auto;
+  width: 70%;
+}
+
+#query {
+  flex-grow: 2;
+}
+
+#search-select {
+  flex-shrink: 4;
 }
 
 .nav-img {
