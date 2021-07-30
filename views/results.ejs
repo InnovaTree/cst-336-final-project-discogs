@@ -27,9 +27,9 @@
       <div class="col d-flex flex-column mt-3 text-center">
         <a href="/search/<%=results[i].id%>">
           <% if (results[i].thumb != "") { %>
-          <img src="<%= results[i].thumb %>" width="150" height="150" />
+          <img class="img-fluid" src="<%= results[i].thumb %>" width="150" height="150" />
           <% } else { %>
-          <img src="https://via.placeholder.com/150" />
+          <img class="img-fluid" src="https://via.placeholder.com/150" />
           <% } %>
         </a>
         <strong><%= results[i].title %></strong>
