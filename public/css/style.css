@@ -5,49 +5,34 @@
 
 #home-grid {
   display: grid !important;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   gap: 0px 0px;
+  grid-auto-flow: row;
   grid-template-areas:
-    ". g1 g1 . ."
-    ". . g2 g2 ."
-    ". . g3 . .";
-  width: 100%;
-  height: 100%;
-}
+    ". . . . . ."
+    ". home-1 home-1 . . ."
+    ". home-2 home-2 . . ."
+    ". home-3 home-3 . . ."
+    ". . . . . .";
 
-#home-grid h1 {
+  background-image: url("/img/landing.jpg");
   color: white;
-  text-shadow: 2px 2px 5px black;
+  text-shadow: 3px 3px 10px black;
 }
 
-#home-grid button {
-  box-shadow: 2px 2px 5px black;
+.home-1 {
+  grid-area: home-1;
 }
 
-.g1 {
-  grid-area: g1;
-  align-self: end;
-}
-.g2 {
-  grid-area: g2;
-}
-.g3 {
-  grid-area: g3;
-  justify-self: center;
-  align-items: start;
+.home-2 {
+  grid-area: home-2;
+  align-self: center;
+
 }
 
-.bg-img {
-  background-image: url("https://images.pexels.com/photos/2191013/pexels-photo-2191013.jpeg");
-  position: absolute;
-  height: 90%;
-  width: 100%;
-  z-index: -1;
-  background-repeat: no-repeat;
-  background-size: cover;
-  filter: blur(5px);
-  -webkit-filter: blur(5px);
+.home-3 {
+  grid-area: home-3;
 }
 
 #sign-up-grid {
