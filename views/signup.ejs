@@ -1,4 +1,5 @@
 <%- include('partials/header.ejs') %>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <main id="sign-up-grid">
   <form class="container-lg p-5 sg1" method="POST" action="/signup">
@@ -39,9 +40,14 @@
       />
       <span class="errorFdbk" id="pwdConfFdbk"></span>
     </div>
-    <button type="submit" class="btn btn-primary" id="submit">Sign Up</button>
+    <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Lfly9IbAAAAAH0rdYb0Gu8QXa6ufx7Fr9N167H0"></div>
+    <br>
+    <button type="submit"  class="btn btn-primary" id="submit">Sign Up</button>
+    <br>
+    <br>
   </form>
   <div class="sg2"></div>
+  <br>
 </main>
 
 <script src="/js/signUpValid.js"></script>
