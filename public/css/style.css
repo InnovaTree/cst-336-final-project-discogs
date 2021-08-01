@@ -57,6 +57,7 @@
 }
 
 #login form {
+  position: absolute;
   width: 30%;
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 1px 1px 10px black;
@@ -126,6 +127,10 @@ main {
 }
 
 footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   background-image: url("/img/papyrus-dark.png");
 }
 

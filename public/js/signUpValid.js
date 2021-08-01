@@ -35,9 +35,15 @@ $(document).ready( function(){
     }
     return isValid;
   }
+  
   $("#submit").on("click", function(event){
     if (!isFormValid()) {
       event.preventDefault();
     }
   });
+
 });
+
+function recaptchaCallback() {
+  $('#submit').removeAttr('disabled');
+};
