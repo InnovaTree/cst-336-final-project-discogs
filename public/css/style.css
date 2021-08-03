@@ -57,7 +57,6 @@
 }
 
 #login form {
-  position: absolute;
   width: 30%;
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 1px 1px 10px black;
