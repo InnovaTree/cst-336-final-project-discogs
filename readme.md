@@ -55,7 +55,7 @@
 
 - [Discogs API Documentation](https://www.discogs.com/developers)
 - [Final Report](/documentation/ChiemRoweShumStankovich_CST336__Final_Project_1.1.pdf)
-- [MySQL Database Dump](/documentation/ChiemRoweShumStankovich_CST336_MySQL_Dump.sql)
+- [MySQL Database Dump](/documentation/database/ChiemRoweShumStankovich_CST336_MySQL_Dump.sql)
 
 Please refer to our final report for extended discussion regarding design considerations, open issues, planned future implementation and additional screenshots.
 
