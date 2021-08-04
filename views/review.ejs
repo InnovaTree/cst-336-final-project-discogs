@@ -2,7 +2,10 @@
 
 <main class="">
   <section id="review-container" class="container my-5 d-flex flex-row">
-    <section id="pageLeft" class="d-flex flex-column text-center align-items-center">
+    <section
+      id="pageLeft"
+      class="d-flex flex-column text-center align-items-center"
+    >
       <h4><%= title %></h4>
       <img class="img-fluid" src="<%= image %>" width="300" height="300" />
       <a href="/search/<%= albumid %>">
@@ -12,21 +15,25 @@
     <section id="pageRight" class="mx-5 container-fluid">
       <div id="userReview">
         <h2>Your review:</h2>
-        <div id="reviewText"></div>
+        <div id="reviewText">Loading...</div>
         <div id="reviewControls">
           <button class="btn btn-primary hidden" id="submit">Submit</button>
-          <button class="btn btn-primary hidden" id="write">Write Review</button>
+          <button class="btn btn-primary hidden" id="write">
+            Write Review
+          </button>
           <button class="btn btn-primary hidden" id="modify">Modify</button>
           <button class="btn btn-primary hidden" id="delete">Delete</button>
         </div>
       </div>
       <div class="my-5">
         <h2>User Reviews:</h2>
-        <div id="allReviews"></div>
+        <div id="allReviews">Loading...</div>
       </div>
     </section>
   </section>
 </main>
+
+<br /><br />
 
 <script src="/js/reviewPage.js"></script>
 <%- include('partials/footer.ejs') %>

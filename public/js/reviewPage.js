@@ -125,7 +125,7 @@ $(document).ready(async function () {
       $("#allReviews").html("");
       for (const [key, value] of Object.entries(allReview)) {
         $("#allReviews").append(`
-          <div class="p-3 border border-dark">
+          <div class="p-3 border border-dark mt-3">
             <p>${value.reviewtext}</p>
             <hr>
             Written by <strong>${value.username}</strong>
