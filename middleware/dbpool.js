@@ -1,5 +1,9 @@
 const mysql = require('mysql');
 
+/**
+ * Creates connection pool with Heroku database. Attributes
+ * are store in environment variables.
+ */
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: process.env.DB_HOST,
