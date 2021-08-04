@@ -14,7 +14,7 @@
 
 # _Final Project: Album Collection_
 
-[![Run on Repl.it](https://repl.it/badge/github/raymondshum/cst-336-final-project-discogs)](https://replit.com/@raymondshum/cst-336-final-project-discogs)
+[![Run on Repl.it](https://repl.it/badge/github/raymondshum/cst-336-final-project-discogs)](https://cst-336-final-project-discogs.raymondshum.repl.co/)
 
 ---
 
