@@ -1,7 +1,13 @@
 $(document).ready(async function () {
+  /**
+   * Event listener for the collections button.
+   */
   $("#col").on("click", async function () {
     initButtons();
     let myCol = await getMyCol();
+
+    // Builds a bootstrap grid (5x10) of albums with the
+    // values of myCol
     let htmlString = '<div class="row row-cols-5">';
     for (const [key, value] of Object.entries(myCol)) {
       htmlString += `
@@ -18,6 +24,10 @@ $(document).ready(async function () {
     document.getElementById("col").classList.add("btn-danger");
   });
 
+  /**
+   * Event listener for wishlist button. Performs the same function
+   * as collections button, but using the wishlist API.
+   */
   $("#wsh").on("click", async function () {
     initButtons();
     let myWsh = await getMyWsh();
@@ -38,11 +48,18 @@ $(document).ready(async function () {
     document.getElementById("wsh").classList.add("btn-danger");
   });
 
+  /**
+   * Event listener for reviews button.
+   */
   $("#rev").on("click", async function () {
     initButtons();
     let myRev = await getMyRev();
     console.log(myRev);
     let htmlString = "";
+
+    // Builds flexbox divs based on the values of myRev.
+    // albumid and title are on the left div.
+    // reviewText is on the right div.
     for (const [key, value] of Object.entries(myRev)) {
       htmlString += `
         <div class="my-3 d-flex flex-row align-items-center">
@@ -63,6 +80,10 @@ $(document).ready(async function () {
     document.getElementById("rev").classList.add("btn-danger");
   });
 
+  /**
+   * Event listener for search button. Builds and displays
+   * and HTML search bar on click.
+   */
   $("#search").on("click", async function () {
     initButtons();
     document.getElementById("search").classList.add("btn-danger");
@@ -91,6 +112,9 @@ $(document).ready(async function () {
     `);
   });
 
+  /**
+   * Sets all buttons back to blue color.
+   */
   function initButtons() {
     let buttons = document.querySelectorAll("button");
     for (let i = 0; i < buttons.length; i++) {
@@ -99,6 +123,12 @@ $(document).ready(async function () {
     }
   }
 
+  /**
+   * Issues fetch request to collection API to retrieve 
+   * title, and imageURL associated with current user 
+   * and albumids in their collection.
+   * @returns {object} JSON response
+   */
   async function getMyCol() {
     let url = "/api/collection/getdetailed";
     let response = fetch(url);
@@ -106,6 +136,11 @@ $(document).ready(async function () {
     return data;
   }
 
+  /**
+   * Performs the same function as getMyCol() but with the
+   * wishlist API.
+   * @returns {object} JSON response
+   */
   async function getMyWsh() {
     let url = "/api/wishlist/getdetailed";
     let response = fetch(url);
@@ -113,6 +148,13 @@ $(document).ready(async function () {
     return data;
   }
 
+  /**
+   * Issues fetch request to review API to retrieve
+   * title, imageURL and reviewText associated with
+   * current user and associated albums in the review
+   * table.
+   * @returns {object} JSON response
+   */
   async function getMyRev() {
     let url = "/api/review/getdetailed";
     let response = fetch(url);
