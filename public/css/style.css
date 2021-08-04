@@ -28,7 +28,6 @@
 .home-2 {
   grid-area: home-2;
   align-self: center;
-
 }
 
 .home-3 {
@@ -90,7 +89,7 @@
 }
 
 #search-select {
-  flex-shrink: 4;
+  flex-shrink: 3;
 }
 
 .nav-img {
@@ -135,4 +134,17 @@ footer {
 
 nav {
   background-image: url("/img/papyrus-dark.png");
+}
+
+#reviewControls {
+  display: flex;
+  margin-top: 0.5rem;
+}
+
+#reviewControls button {
+  margin-right: 0.25rem;
+}
+
+.hidden {
+  display: none;
 }
