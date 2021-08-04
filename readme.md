@@ -12,72 +12,83 @@
 
 ---
 
-## _Final Project: Album Collection_
+# _Final Project: Album Collection_
 
-Placeholder: link to website.
-
----
-
-### **Table of Contents:**
-
-> Placeholder. This is a test of Replit's version control.
+[![Run on Repl.it](https://repl.it/badge/github/raymondshum/cst-336-final-project-discogs)](https://replit.com/@raymondshum/cst-336-final-project-discogs)
 
 ---
 
+## **Table of Contents:**
+
+1. [Team](#team)
+1. [Project Description](#project-description)
+1. [Resources](#resources)
+1. [User Flow](#user-flow)
+1. [DB Schema](#db-schema)
+1. [Screenshots](#screenshots)
+
+---
+
 ---
 
 
-### **Team:**
+## **Team:**
 
 - [Larry Chiem](https://github.com/KFChinese)
 - [Ian Rowe](https://github.com/MaskedCrash)
 - [Raymond Shum](https://github.com/raymondshum)
 - [Nicholas Stankovich](https://github.com/NStankovich)
 
+[Return to Top](#table-of-contents)
+
 --- 
 
-### **Project Description:**
+## **Project Description:**
 
-> This website allows a user to build and manage their album collection using the Discogs API.
+> This website allows a user to build and manage their album collection using the Discogs API. It uses Node.js (hosted on Replit) and a MySQL server (hosted on Heroku) on the backend. Express.js is used as the templating engine. Styling is performed through Bootstrap 5 and custom CSS.
+
+[Return to Top](#table-of-contents)
 
 ---
 
-### **Resources:**
+## **Resources:**
 
 - [Discogs API Documentation](https://www.discogs.com/developers)
-- Suggested API Calls: 
-    - [GET] /database/search?q={query}&{?type,title,release_title,credit,artist,anv,label,genre,style,country,year,format,catno,barcode,track,submitter,contributor}
-    - [GET] /releases/{release_id}{?curr_abbr}
-    - [GET] /artists/{artist_id}
-    - [GET] /labels/{label_id}
-    - [GET] /marketplace/price_suggestions/{release_id}
+- [Final Report](/documentation/ChiemRoweShumStankovich_CST336__Final_Project_1.1.pdf)
+- [MySQL Database Dump](/documentation/ChiemRoweShumStankovich_CST336_MySQL_Dump.sql)
+
+Please refer to our final report for extended discussion regarding design considerations, open issues, planned future implementation and additional screenshots.
+
+[Return to Top](#table-of-contents)
 
 ---
 
-### **User Flow:**
-
-> User must be authorized first before proceeding to the dashboard and beyond. The
-user can only access to the "Home", "Sign Up" and "Log In" pages before then.
+## **User Flow:**
 
 ![userflow](/documentation/userflow.JPG)
 
+[Return to Top](#table-of-contents)
+
 ---
 
-### **DB Schema:**
-
-> We are querying the Discog's API for all album data: title, thumbnail, etc. Our DB
-only associates Discog's album IDs with our users.
+## **DB Schema:**
 
 ![schema](/documentation/schema.JPG)
 
----
-
-### **Screenshots:**
-
-> Placeholder Description
+[Return to Top](#table-of-contents)
 
 ---
 
-### **Rubric:**
+## **Screenshots:**
 
-![rubric](/documentation/rubric.JPG)
+![sample](/documentation/s1.jpg)
+
+![sample](/documentation/s2.jpg)
+
+![sample](/documentation/s3.jpg)
+
+![sample](/documentation/s4.jpg)
+
+![sample](/documentation/s5.jpg)
+
+[Return to Top](#table-of-contents)
