@@ -10,6 +10,13 @@ CREATE TABLE user (
     PRIMARY KEY (userid)
 );
 
+CREATE TABLE `album` (
+  `albumid` int NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `image` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`albumid`)
+);
+
 CREATE TABLE collection (
 	collectionid INT NOT NULL AUTO_INCREMENT,
     userid INT NOT NULL,
